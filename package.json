@@ -1,0 +1,22 @@
+{
+  "name": "homebridge-garagedoor-loxone-deconz",
+  "version": "1.0.0",
+  "description": "Garage door plugin for sensors in deCONZ and a Loxone garage door",
+  "main": "index.js",
+  "keywords": [
+    "homebridge-plugin",
+    "loxone",
+    "deconz",
+    "phoscon",
+    "garage",
+    "garage-door"
+  ],
+  "engines": {
+    "homebridge": "^0.4.50",
+    "node": "^12.14.1"
+  },
+  "author": "Christian Klee",
+  "dependencies": {
+    "node-fetch": "^2.6.0"
+  }
+}
