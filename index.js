@@ -39,8 +39,10 @@ GarageCmdAccessory.prototype.setState = function(isClosed, callback, context) {
   var command = accessory[prop];
   let username = this.user;
   let password = this.password;
-  let headers = new Headers();
+  let headers = fetch.Headers;
   headers.set('Authorization', 'Basic ' + btoa(username + ":" + password));
+  headers.set('Authorization', 'Basic ' + Buffer.from(username + ":" + password).toString('base64'));
+
 
   var config = {
       method:'GET',
