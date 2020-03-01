@@ -31,6 +31,16 @@
         "type": "string",
         "required": true
       },
+      "sensorupid": {
+        "title": "Door open sensor id from deCONZ",
+        "type": "string",
+        "required": true
+      },
+      "sensordownid": {
+        "title": "Door closed sensor id from deCONZ",
+        "type": "string",
+        "required": true
+      },
       "urllox": {
         "title": "URL Loxone (with port)",
         "type": "string",
@@ -69,6 +79,8 @@
     "password",
     "urldec",
     "apidec",
+    "sensorupid",
+    "sensordownid",
     "urllox",
     "garagedoorlox",
     "status_update_delay",

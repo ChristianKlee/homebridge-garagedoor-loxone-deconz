@@ -15,6 +15,8 @@ function GarageCmdAccessory(log, config) {
   this.password = config.password;
   this.urldec = config.urldec;
   this.apidec = config.apidec;
+  this.sensorupid = config.sensorupid;
+  this.sensordownid = config.sensordownid;
   this.urllox = config.urllox;
   this.garagedoorlox = config.garagedoorlox;
   this.stateCommand = true;
@@ -54,8 +56,8 @@ GarageCmdAccessory.prototype.setState = function(isClosed, callback, context) {
       return response.json();
   })
   .then((data) => {
-    var garageDownOpen = data[6].state.open
-    var garageUpOpen = data[7].state.open
+    var garageDownOpen = data[accessory.sensordownid].state.open
+    var garageUpOpen = data[accessory.sensorupid].state.open
 
     if (!garageDownOpen && garageUpOpen) {
       //here loxone
@@ -97,8 +99,8 @@ GarageCmdAccessory.prototype.getState = function(callback) {
       return response.json();
   })
   .then((data) => {
-      var garageDownOpen = data[6].state.open
-      var garageUpOpen = data[7].state.open
+      var garageDownOpen = data[accessory.sensordownid].state.open
+      var garageUpOpen = data[accessory.sensorupid].state.open
 
       var state = '';
       if (!garageDownOpen && garageUpOpen && accessory.ignoreErrors) {
