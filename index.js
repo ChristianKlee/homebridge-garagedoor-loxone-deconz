@@ -34,14 +34,13 @@ GarageCmdAccessory.prototype.setState = function(isClosed, callback, context) {
   }
 
   var accessory = this;
-  var state = isClosed ? 'close' : 'open';
+  var state = isClosed ? 'open' : 'close';
   var prop = state + 'Command';
   var command = accessory[prop];
   let username = this.user;
   let password = this.password;
   let headers = new fetch.Headers();
   headers.set('Authorization', 'Basic ' + Buffer.from(username + ":" + password).toString('base64'));
-
 
   var config = {
       method:'GET',
@@ -81,7 +80,6 @@ GarageCmdAccessory.prototype.setState = function(isClosed, callback, context) {
         function() {
           accessory.garageDoorService.setCharacteristic(Characteristic.CurrentDoorState, Characteristic.CurrentDoorState.CLOSED);
           fetch(accessory.urllox+'/dev/sps/io/'+accessory.garagedoorlox+'/Off', config)
-
         },
         accessory.statusUpdateDelay * 1000
       );
@@ -104,8 +102,11 @@ GarageCmdAccessory.prototype.getState = function(callback) {
       var garageUpOpen = data[accessory.sensorupid].state.open
 
       var state = '';
-      if (!garageDownOpen && garageUpOpen && accessory.ignoreErrors) {
+      if (!garageDownOpen && garageUpOpen) {
         state = 'CLOSED';
+      } 
+      if (garageDownOpen && !garageUpOpen) {
+        state = 'OPEN';
       }
       if (accessory.logPolling) {
         accessory.log('State of ' + accessory.name + ' is: ' + state);
